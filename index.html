@@ -105,16 +105,155 @@
                             Vamos começar entendendo melhor sobre a área de segurança em biometria
                         </aside>
                     </section>
+                    <section>
+                        <h4> Fluxo do sistema proposto </h4>
+                        <img data-src="images/flow.jpeg" height="580px">
+                        <aside class="notes">
+                            Trabalho do maata et al;
+                            Uso de imagens impressas;
+                        </aside>
+                    </section>
+                    <section data-background-video="images/intro.mp4" data-background-video-loop="loop">
+                        <h3> 1. Aquisição das Imagens </h3>
+                        <aside class="notes">
+                            Máscaras feitas no thatsmyface.com
+                        </aside>
+                    </section>
+                    <section data-background-video="images/intro.mp4" data-background-video-loop="loop">
+                        <h3> 2. Detecção Facial </h3>
+                    </section>
+                    <section data-background-video="images/intro.mp4" data-background-video-loop="loop">
+                        <h3> 3. Normalização </h3>
+                    </section>
+                    <section>
+                        <h3> 4. Extração de Características</h3>
+                        <h4>Padrões Binários Locais</h4>
+                        <p><small>LBP - Local Binary Patterns</small></p>
+                        <img data-src="images/lbp.png" height="150px">
+                        <img data-src="images/lbp-hist.png" height="200px">
+                        <aside class="notes">
+                            Ilustração do funcionamento do LBP;
+                            Divisão da imagem em subregiões 8x8;
+                            Histograma é a contagem da frequencia de aparição dos numeros;
+                            Calculado histograma de cada subregião;
+                            Concatenação dos sub-hist gera o hist principal;
+                        </aside>
+                    </section>
+                    <section data-background-video="images/intro.mp4" data-background-video-loop="loop">
+                        <h3> 4. Extração de Características </h3>
+                        <aside class="notes">
+                            Visualização do LBP;
+                            Informação de textura é capturada;
+                        </aside>
+                    </section>
+                    <section>
+                        <h3> 5. Classificação </h3>
+                        <h4>Máquinas de Vetores de Suporte </h4>
+                        <p><small>SVM - Support Vector Machines</small></p>
+                        <img data-src="images/svm.png" width="45%">
+                        <aside class="notes">
+                            Separação entre classes, duas nesse caso (real/falsa);
+                        </aside>
+                    </section>
+                    <section data-background-video="images/intro.mp4" data-background-video-loop="loop">
+                        <h3> 5. Classificação </h3>
+                        <aside class="notes">
+                            Objetivo desta etapa, dada as faces, classificar entre reais ou não;
+                        </aside>
+                    </section>
                 </section>
                 <!-- Resultados -->
                 <section id="resultados">
                     <section>
                         <h1 style="color:black">Resultados</h1>
                         <aside class="notes">
-                            Vamos começar entendendo melhor sobre a área de segurança em biometria
+                            A base de dados é dividida em três conjuntos diferentes: treino, desenvolvimento e
+                            teste;
+                            7, 5, 5 usuários;
+                            Treino/dev para treino e otimização, teste p/ teste;
+                            Não utilizamos o conjunto dev;
+                            Dois testes: com e sem norm, suspeita de norm influenciando resultado;
                         </aside>
                     </section>
-                </section>
+                    <section>
+                        <h3> Resultados SEM normalização </h3>
+                        <table style="font-size: 25px;">
+                            <thead>
+                                <tr>
+                                    <th>tipo de imagem</th>
+                                    <th># imagens avaliadas</th>
+                                    <th># faces detectadas</th>
+                                    <th># corretas</th>
+                                    <th># incorretas</th>
+                                    <th>Taxa de acerto</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>real</td>
+                                    <td>15000</td>
+                                 	<td>14673</td>
+                                 	<td>14615</td>
+                                    <td>58</td>
+                                    <td>99.60%</td>
+                                </tr>
+                                <tr>
+                                    <td>falsa</td>
+                                    <td>7500</td>
+                                 	<td>7458</td>
+                                 	<td>7228</td>
+                                    <td>230</td>
+                                    <td>96.91%</td>
+                                </tr>
+                            </tbody>
+                            </tbody>
+                       </table>
+                        <img data-src="images/detectedface_results.png" width="35%">
+                        <p><small> Exemplos de classificações; incorretas na linha superior, corretas na linha inferior. </small></p>
+                        <aside class="notes">
+                            Objetivo desta etapa, dada as faces, classificar entre reais ou não;
+                        </aside>
+                    </section>
+                    <section>
+                        <h3> Resultados COM normalização </h3>
+                        <table style="font-size: 25px;">
+                            <thead>
+                                <tr>
+                                    <th>tipo de imagem</th>
+                                    <th># imagens avaliadas</th>
+                                    <th># faces detectadas</th>
+                                    <th># corretas</th>
+                                    <th># incorretas</th>
+                                    <th>Taxa de acerto</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>real</td>
+                                    <td>15000</td>
+                                 	<td>14673</td>
+                                 	<td>14615</td>
+                                    <td>58</td>
+                                    <td>99.60%</td>
+                                </tr>
+                                <tr>
+                                    <td>falsa</td>
+                                    <td>7500</td>
+                                 	<td>7441</td>
+                                 	<td>7208</td>
+                                    <td>233</td>
+                                    <td>96.86%</td>
+                                </tr>
+                            </tbody>
+                            </tbody>
+                       </table>
+                        <img data-src="images/normalization_results.png" width="35%">
+                        <p><small> Exemplos de classificações; incorretas na linha superior, corretas na linha inferior. </small></p>
+                        <aside class="notes">
+                            Objetivo desta etapa, dada as faces, classificar entre reais ou não;
+                        </aside>
+                    </section>
+               </section>
                 <!-- Conclusão -->
                 <section id="conclusão">
                     <section>
