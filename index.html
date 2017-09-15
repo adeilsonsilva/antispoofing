@@ -51,14 +51,17 @@
                     <section>
                         <h1 style="color:black">Introdução</h1>
                         <aside class="notes">
-                            Vamos começar entendendo melhor sobre a área de segurança em biometria
+                            Biometria realidade; 
+                            Mais seguros por carac físicar ou comport;
+                            Vamos começar entendendo melhor sobre a área de segurança em biometria;
                         </aside>
                     </section>
                     <!-- Referencial Teórico -->
                     <section>
                         <h2>Sistemas biométricos são a prova de fraudes?</h2>
                         <aside class="notes">
-                            Biometria já é uma realidade; 
+                            Vuln comuns a outros tipos de sistema: DoS, ataques à base de dados com a intenção de vazamento de informações, reconstrução de perfil de usuário a partir dos seus padrões biométricos armazenados;
+                            Vuln específicas: simular característica biométrica p/ obter acesso;
                             Trabalho passado (Adeilson, 2015) foi apontada a necessidade de se proteger contra fraudes;
                             Agora alguns outros trabalhos que já abordaram esse tema;
                         </aside>
@@ -69,7 +72,9 @@
                         <img data-src="images/peixoto2.png">
                         <aside class="notes">
                             Trabalho do peixoto et al;
-                            Uso de imagens recapturadas numa tela LCD;
+                            Uso de imagens recapturadas numa tela LCD ou impressas;
+                            Brilho da tela modifica iluminação da imagem;
+                            Condições adversas de iluminação;
                         </aside>
 					</section>
                     <section>
@@ -77,8 +82,9 @@
                         <img data-src="images/peixoto4.png" width="45%" style="float: right">
                         <p><small>Peixoto B. <i>et. al</i>, "Face liveness detection under bad illumination conditions.", 2011</small></p>
                         <aside class="notes">
-                            Trabalho do peixoto et al;
-                            Uso de imagens recapturadas numa tela LCD;
+                            Extensão do Tan et al;
+                            Melhoria grande nos resultados usando mesma database;
+                            Tan originalmente apresenta NUAA, Peixoto que usa a Yale;
                         </aside>
 					</section>
                     <!-- Maatta et. al -->
@@ -88,14 +94,41 @@
                         <aside class="notes">
                             Trabalho do maata et al;
                             Uso de imagens impressas;
+                            Análise da textura das imagens usando LBP;
+                            Uso de variações do LBP concatenadas num unico histograma, maior poder de descrição;
+                            Uso do SVM;
                         </aside>
 					</section>
                     <section>
                         <img data-src="images/maatta3.png">
                         <p><small>Määttä J. <i>et. al</i>, "Face spoofing detection from single images using micro-texture analysis.", IJCB 2011</small></p>
                         <aside class="notes">
-                            Trabalho do maata et al;
-                            Uso de imagens impressas;
+                            Reportadas sobre a NUAA;
+                            Método diferente, resultado melhor;
+                            Reportados em AUC (area debaixo da curva). Perf de classif de 98%;
+                            Face real e impressa reflete luz de formas diferentes;
+                        </aside>
+					</section>
+                    <!-- Anjos et. al -->
+                    <section>
+                        <img data-src="images/anjos1.png" height="200px">
+                        <img data-src="images/anjos2.png" height="350px">
+                        <aside class="notes">
+                            Trabalho do anjos et al;
+                            Imagens impressas;
+                            Introdução da PRINT-ATTACK database;
+                            Análise de movimento relativo entre a face e a cena de fundo;
+                            Avalia ao longo do tempo a relação da intensidade de movimento face x fundo;
+                        </aside>
+					</section>
+                    <section>
+                        <img data-src="images/anjos3.png">
+                        <p><small>Anjos A. <i>et. al</i>, "Counter-measures to photo attacks in face recognition: A public database and a baseline.", IJCB 2011</small></p>
+                        <aside class="notes">
+                            Dois tipos de ataques, fixo num suporte e pessoa segurando;
+                            Por ser temporal, resultados aumentam em rel a qtd de frames;
+                            Performance melhor segurando;
+                            FRR = acesso real rejeitado, FAR = ataque aceito, HTER = (frr+far)/2;
                         </aside>
 					</section>
                     <!-- Erdogmus et. al -->
@@ -104,14 +137,20 @@
                         <img data-src="images/erdogmus2.png" height="400px">
                         <aside class="notes">
                             Trabalho do erdogmus et al;
-                            Uso de máscaras 3d em imagens 2d;
+                            Uso de máscaras 3d em imagens 2d e profundidade;
+                            Apresenta 3DMAD;
+                            P/ antispoof combinação de LBP com LDA, qui-quadrado, SVM;
                         </aside>
 					</section>
                     <section>
                         <img data-src="images/erdogmus3.png">
                         <p><small>Erdogmus N. <i>et. al</i>, "Spoofing in 2D Face Recognition with 3D Masks and Anti-spoofing with Kinect.", BTAS 2013</small></p>
                         <aside class="notes">
-                            Diferenças: kernel radial;
+                            Resultados em HTER;
+                            Não é fácil dizer qual melhor variação LBP;
+                            Para imagens de cor, LBP + LDA ou SVM é melhor; Usando qui-q, dLBP;
+                            Profundidade, tLBP + qui2 e lda, svm + mLBP;
+                            O nosso é extensão desse trabalho, principalmente;
                         </aside>
 					</section>
                 </section>
@@ -120,7 +159,7 @@
                     <section>
                         <h1 style="color:black">Sistema</h1>
                         <aside class="notes">
-                            Vamos começar entendendo melhor sobre a área de segurança em biometria
+                            Vamos falar sobre o sistema proposto;
                         </aside>
                     </section>
                     <section>
@@ -142,12 +181,28 @@
                             <h3 style="color: white;"> 2. Detecção Facial </h3>
                             <img data-src="images/haar.png">
                         </div>
+                        <aside class="notes">
+                            Aplicação de classificadores em cascata;
+                            A região da face possui características espec, como olhos mais escuro que nariz e boch, por ex;
+                            Cascata pq algumas carac só são verif caso encontre outra;
+                            Variando tamanho da janela e buscando classifcar;
+                            Isso melhora performance pois existem milhares de desc possiveis p/ regioes da face;
+                            Mesmo metodo p/ detectar olhos;
+                        </aside>
                     </section>
                     <section data-background-video="images/norm.webm" data-background-video-loop="loop">
                         <div style="margin-top: 150px;">
                             <h3 style="color: white;"> 3. Normalização </h3>
                             <img data-src="images/norm_flow.png" height="150px">
                         </div>
+                        <aside class="notes">
+                            Face e olhos detectados;
+                            Calculo da angulação e dist entre olhos;
+                            Existe uma pos espec em que deve ficar em rel ao centro da imagem;
+                            Rotac e transl p ficar na pos determ;
+                            Diferença de ilum baseada em onde a fonte de luz está;
+                            Balanceamento do brilho e contraste;
+                        </aside>
                     </section>
                     <section>
                         <h3> 4. Extração de Características</h3>
@@ -233,7 +288,7 @@
                             </tbody>
                        </table>
                         <img data-src="images/detectedface_results.png" width="35%">
-                        <p><small> Exemplos de classificações; incorretas na linha superior, corretas na linha inferior. </small></p>
+                        <p><small> Exemplos de classificações; </small></p>
                         <aside class="notes">
                             Objetivo desta etapa, dada as faces, classificar entre reais ou não;
                         </aside>
@@ -272,9 +327,8 @@
                             </tbody>
                        </table>
                         <img data-src="images/normalization_results.png" width="35%">
-                        <p><small> Exemplos de classificações; incorretas na linha superior, corretas na linha inferior. </small></p>
+                        <p><small> Exemplos de classificações; </small></p>
                         <aside class="notes">
-                            Objetivo desta etapa, dada as faces, classificar entre reais ou não;
                         </aside>
                     </section>
                </section>
@@ -336,6 +390,8 @@
                         <aside class="notes">
                             O processo de detecção da face apresentou variações;
                             O processo de normalização teve um impacto maior nas imagens reais;
+                            Apesar do desemp pior acredit que a norm deve continuar;
+                            Pq a norm faz comparar so a textura da regiao da mascara;
                         </aside>
                     </section>
                     <section>
@@ -346,23 +402,23 @@
                     <section id="Futuro">
                         <h2>Trabalhos Futuros </h2>
                         <aside class="notes">
-                            Vamos começar entendendo melhor sobre a área de segurança em biometria
+                            Extensão do trab anterior usando imagens infrav;
                         </aside>
                     </section>
                     <section>
                         <h3>Imagens impressas</h3>
                         <img data-src="images/fakevsreal.png" width="80%">
                         <aside class="notes">
-                            Trabalho do maata et al;
-                            Uso de imagens impressas;
+                            Imagem imp nao engana o sist atual;
+                            Dif grande de ilum e textura;
                         </aside>
 					</section>
                     <section>
                         <h3>Papel Fotográfico</h3>
                         <img data-src="images/papel_fotografico.png" width="80%">
                         <aside class="notes">
-                            Trabalho do maata et al;
-                            Uso de imagens impressas;
+                            Papel fot reflete luz inf do sensor;
+                            Face acaba nao aparec;
                         </aside>
 					</section>
                 </section>
