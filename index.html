@@ -33,10 +33,12 @@
                         -->
                     </section>
                     <section data-background-video="images/intro.mp4" data-background-video-loop="loop">
-                        <h2 style="opacity: 0.7; color: white;">DETECÇÃO DE FRAUDES NA AUTENTICAÇÃO FACIAL MULTIMODAL</h2>
-                        <h3 style="opacity: 0.7; color: white;">Universidade Federal da Bahia</h3>
-                        <p style="opacity: 0.7; color: black;"> <small>MATA67 - PROJETO FINAL DE CURSO II</small> </p>
-                        <p style="opacity: 0.7; color: white;"> <small> Adeilson Silva / <a href="https://github.com/AdeilsonSilva">@adeilsonsilva</a></small> </p>
+                        <div style="margin-top: 200px;">
+                            <h2 style="opacity: 0.9; color: black;">DETECÇÃO DE FRAUDES NA AUTENTICAÇÃO FACIAL MULTIMODAL</h2>
+                            <h3 style="opacity: 0.5; color: black;">Universidade Federal da Bahia</h3>
+                            <p style="opacity: 0.9; color: black;"> <small>MATA67 - PROJETO FINAL DE CURSO II</small> </p>
+                            <p style="opacity: 0.7; color: black;"> <small> Adeilson Silva / <a href="https://github.com/AdeilsonSilva">@adeilsonsilva</a></small> </p>
+                        </div>
                         <aside class="notes">
                             Boa tarde!
                             Meu nome é Adeilson
@@ -109,21 +111,27 @@
                         <h4> Fluxo do sistema proposto </h4>
                         <img data-src="images/flow.jpeg" height="580px">
                         <aside class="notes">
-                            Trabalho do maata et al;
-                            Uso de imagens impressas;
                         </aside>
                     </section>
                     <section data-background-video="images/intro.mp4" data-background-video-loop="loop">
-                        <h3> 1. Aquisição das Imagens </h3>
+                        <h3 style="color: black;"> 1. Aquisição das Imagens </h3>
                         <aside class="notes">
-                            Máscaras feitas no thatsmyface.com
+                            Máscaras feitas no thatsmyface.com;
+                            3D Mask Attack Database;
+                            17u, 3 sessões/u, 5 vídeos/u, 300 quadros/s, 640x480, cor e depth, kinect;
                         </aside>
                     </section>
-                    <section data-background-video="images/intro.mp4" data-background-video-loop="loop">
-                        <h3> 2. Detecção Facial </h3>
+                    <section data-background-video="images/face_detect.webm" data-background-video-loop="loop">
+                        <div style="margin-top: 150px;">
+                            <h3 style="color: white;"> 2. Detecção Facial </h3>
+                            <img data-src="images/haar.png">
+                        </div>
                     </section>
-                    <section data-background-video="images/intro.mp4" data-background-video-loop="loop">
-                        <h3> 3. Normalização </h3>
+                    <section data-background-video="images/norm.webm" data-background-video-loop="loop">
+                        <div style="margin-top: 150px;">
+                            <h3 style="color: white;"> 3. Normalização </h3>
+                            <img data-src="images/norm_flow.png" height="150px">
+                        </div>
                     </section>
                     <section>
                         <h3> 4. Extração de Características</h3>
@@ -139,8 +147,8 @@
                             Concatenação dos sub-hist gera o hist principal;
                         </aside>
                     </section>
-                    <section data-background-video="images/intro.mp4" data-background-video-loop="loop">
-                        <h3> 4. Extração de Características </h3>
+                    <section data-background-video="images/lbp_vid.webm" data-background-video-loop="loop">
+                        <h3 style="color: white;"> 4. Extração de Características </h3>
                         <aside class="notes">
                             Visualização do LBP;
                             Informação de textura é capturada;
@@ -155,8 +163,8 @@
                             Separação entre classes, duas nesse caso (real/falsa);
                         </aside>
                     </section>
-                    <section data-background-video="images/intro.mp4" data-background-video-loop="loop">
-                        <h3> 5. Classificação </h3>
+                    <section data-background-video="images/classifier.mp4" data-background-video-loop="loop">
+                        <h3 style="color: white;"> 5. Classificação </h3>
                         <aside class="notes">
                             Objetivo desta etapa, dada as faces, classificar entre reais ou não;
                         </aside>
@@ -345,8 +353,10 @@
                 <!-- FIM -->
                 <section id="fim">
                     <section data-background="images/obama10.gif">
-                        <h1 style="color: white;">Obrigado!</h1>
-                        <h2 style="color: white;">Perguntas?</h2>
+                        <div style="margin-top: 250px;">
+                            <h1 style="color: white;">Obrigado!</h1>
+                            <h2 style="color: white;">Perguntas?</h2>
+                        </div>
                     </section>
                 </section>
             </div>
